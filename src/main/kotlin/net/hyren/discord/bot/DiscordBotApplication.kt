@@ -4,6 +4,7 @@ import com.redefantasy.core.shared.CoreProvider
 import net.dv8tion.jda.api.JDA
 import net.dv8tion.jda.api.JDABuilder
 import net.dv8tion.jda.api.OnlineStatus
+import net.dv8tion.jda.api.requests.GatewayIntent
 import net.hyren.discord.bot.echo.packet.listener.UserGroupsUpdatedEchoPacketListener
 import net.hyren.discord.bot.listener.adapter.GenericListeners
 
@@ -19,7 +20,9 @@ object DiscordBotApplication {
         DiscordBotProvider.prepare()
 
         jda = JDABuilder.createDefault(
-                DiscordBotConstants.Tokens.ACCESS_TOKEN
+                DiscordBotConstants.Tokens.ACCESS_TOKEN,
+                GatewayIntent.GUILD_MEMBERS,
+                GatewayIntent.GUILD_MESSAGES
         ).addEventListeners(
                 GenericListeners()
         ).setStatus(
