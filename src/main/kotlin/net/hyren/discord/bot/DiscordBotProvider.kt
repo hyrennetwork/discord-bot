@@ -11,20 +11,24 @@ import java.net.InetSocketAddress
 object DiscordBotProvider {
 
     fun prepare() {
-        CoreProvider.prepare(
-                Application(
-                        "discord-bot",
-                        "Discord Bot",
-                        null,
-                        InetSocketAddress(
-                                "127.0.0.1",
-                                0
-                        ),
-                        ApplicationType.GENERIC,
-                        null,
-                        null
-                )
-        )
+        try {
+            CoreProvider.prepare(
+                    Application(
+                            "discord-bot",
+                            "Discord Bot",
+                            null,
+                            InetSocketAddress(
+                                    "127.0.0.1",
+                                    0
+                            ),
+                            ApplicationType.GENERIC,
+                            null,
+                            null
+                    )
+            )
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 
 }
