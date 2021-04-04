@@ -16,10 +16,19 @@ class GenericListeners : ListenerAdapter() {
         val guild = event.guild
         val member = event.member
 
+        println("Teste")
+
         val verificationRole = when (guild.idLong) {
             DiscordBotConstants.GUILDS[DiscordBotConstants.GuildType.MAIN]?.idLong -> DiscordBotConstants.Roles.MainGuild.VERIFICATION
             else -> null
-        } ?: return
+        }
+
+        if (verificationRole === null) {
+            println("Oxi")
+            return
+        }
+
+        println("?")
 
         guild.addRoleToMember(member, verificationRole).queue()
     }
