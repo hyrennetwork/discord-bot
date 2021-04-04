@@ -1,6 +1,8 @@
 package net.hyren.discord.bot.listener.adapter
 
 import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent
+import net.dv8tion.jda.api.events.guild.member.GuildMemberRoleAddEvent
+import net.dv8tion.jda.api.events.guild.member.GuildMemberRoleRemoveEvent
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent
 import net.dv8tion.jda.api.events.user.UserActivityEndEvent
 import net.dv8tion.jda.api.events.user.UserActivityStartEvent
@@ -70,6 +72,38 @@ class GenericListeners : ListenerAdapter() {
         val member = event.member
 
         member?.syncData()
+    }
+
+    override fun onGuildMemberRoleAdd(
+        event: GuildMemberRoleAddEvent
+    ) {
+        val guild = event.guild
+        val member = event.member
+
+        if (member.canNotSyncData()) {
+            val verificationRole = when (guild) {
+                DiscordBotConstants.GUILDS[DiscordBotConstants.GuildType.MAIN] -> DiscordBotConstants.Roles.MainGuild.VERIFICATION
+                else -> null
+            } ?: return
+
+            guild.addRoleToMember(member, verificationRole).queue()
+        }
+    }
+
+    override fun onGuildMemberRoleRemove(
+        event: GuildMemberRoleRemoveEvent
+    ) {
+        val guild = event.guild
+        val member = event.member
+
+        if (member.canNotSyncData()) {
+            val verificationRole = when (guild) {
+                DiscordBotConstants.GUILDS[DiscordBotConstants.GuildType.MAIN] -> DiscordBotConstants.Roles.MainGuild.VERIFICATION
+                else -> null
+            } ?: return
+
+            guild.addRoleToMember(member, verificationRole).queue()
+        }
     }
 
 }
