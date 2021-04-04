@@ -23,6 +23,9 @@ fun Member.syncData(): Any? {
     val role = highestGroup.asRole() ?: return null
 
     this.roles.forEach {
+        println("Public: ${it.isPublicRole}")
+        println("Managed: ${it.isManaged}")
+
         if ((!role.isPublicRole || !role.isManaged) && it != role) {
             DiscordBotConstants.GUILDS.values.forEach { guild ->
                 guild.removeRoleFromMember(this, it).queue()
