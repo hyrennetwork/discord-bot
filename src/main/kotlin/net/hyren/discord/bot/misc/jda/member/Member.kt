@@ -22,17 +22,6 @@ fun Member.syncData(): Any? {
 
     val role = highestGroup.asRole() ?: return null
 
-    this.roles.forEach {
-        println("Public: ${it.isPublicRole}")
-        println("Managed: ${it.isManaged}")
-
-        if ((!role.isPublicRole || !role.isManaged) && it != role) {
-            DiscordBotConstants.GUILDS.values.forEach { guild ->
-                guild.removeRoleFromMember(this, it).queue()
-            }
-        }
-    }
-
     val currentName = this.nickname
 
     DiscordBotConstants.GUILDS.values.forEach {
@@ -48,4 +37,15 @@ fun Member.syncData(): Any? {
     }
 
     return true
+}
+
+fun Member.removeRoles() {
+    this.roles.stream()
+        .filter { !it.isPublicRole }
+        .filter { !it.isManaged }
+        .forEach {
+            DiscordBotConstants.GUILDS.values.forEach { guild ->
+                guild.removeRoleFromMember(this, it).queue()
+        }
+    }
 }
