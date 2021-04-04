@@ -27,7 +27,7 @@ object DiscordBotConstants {
 
     object Roles {
 
-        object MAIN_GUILD {
+        object MainGuild {
 
             val MASTER = DiscordBotApplication.jda.roleCache.getElementById(828129837780303914)
             val MANAGER = DiscordBotApplication.jda.roleCache.getElementById(828129861327519765)
@@ -40,6 +40,8 @@ object DiscordBotConstants {
             val VIP_PLUS = DiscordBotApplication.jda.roleCache.getElementById(828129906146934784)
             val VIP = DiscordBotApplication.jda.roleCache.getElementById(828129913453936651)
             val MEMBER = DiscordBotApplication.jda.roleCache.getElementById(828129920307691531)
+
+            val VERIFICATION = DiscordBotApplication.jda.roleCache.getElementById(828204580977508382)
 
         }
 
