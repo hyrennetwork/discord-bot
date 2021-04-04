@@ -6,7 +6,6 @@ plugins {
 
     id("com.github.johnrengelman.shadow") version "6.1.0"
     `maven-publish`
-    application
     java
 }
 
@@ -34,6 +33,10 @@ tasks {
     }
 
     shadowJar {
+        manifest {
+            attributes["Main-Class"] = "net.hyren.discord.bot.DiscordBotApplication"
+        }
+
         val fileName = "${project.name}.jar"
 
         archiveFileName.set("${project.name}.jar")
@@ -53,10 +56,6 @@ tasks {
             }
         }
     }
-}
-
-application {
-    mainClass.set("net.hyren.discord.bot.DiscordBotApplication")
 }
 
 dependencies {
