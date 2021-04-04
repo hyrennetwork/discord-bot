@@ -11,9 +11,11 @@ import net.hyren.discord.bot.groups.asRole
  */
 fun Member.canSyncData() = this.syncData() == true
 
+fun Member.canNotSyncData() = this.syncData() == null
+
 fun Member.syncData(): Any? {
     val user = CoreProvider.Cache.Local.USERS.provide().fetchByDiscordId(
-            this.idLong
+        this.idLong
     ) ?: return null
 
     val highestGroup = user.getHighestGroup()

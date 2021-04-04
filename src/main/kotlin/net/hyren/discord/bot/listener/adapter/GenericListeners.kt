@@ -8,7 +8,7 @@ import net.dv8tion.jda.api.events.user.UserTypingEvent
 import net.dv8tion.jda.api.events.user.update.UserUpdateOnlineStatusEvent
 import net.dv8tion.jda.api.hooks.ListenerAdapter
 import net.hyren.discord.bot.DiscordBotConstants
-import net.hyren.discord.bot.misc.jda.member.canSyncData
+import net.hyren.discord.bot.misc.jda.member.canNotSyncData
 import net.hyren.discord.bot.misc.jda.member.syncData
 
 /**
@@ -22,7 +22,7 @@ class GenericListeners : ListenerAdapter() {
         val guild = event.guild
         val member = event.member
 
-        if (member.canSyncData()) {
+        if (member.canNotSyncData()) {
             val verificationRole = when (guild) {
                 DiscordBotConstants.GUILDS[DiscordBotConstants.GuildType.MAIN] -> DiscordBotConstants.Roles.MainGuild.VERIFICATION
                 else -> null
