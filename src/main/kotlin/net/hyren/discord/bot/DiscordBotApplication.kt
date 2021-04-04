@@ -22,7 +22,9 @@ object DiscordBotApplication {
         jda = JDABuilder.createDefault(
                 DiscordBotConstants.Tokens.ACCESS_TOKEN,
                 GatewayIntent.GUILD_MEMBERS,
-                GatewayIntent.GUILD_MESSAGES
+                GatewayIntent.GUILD_PRESENCES,
+                GatewayIntent.GUILD_MESSAGES,
+                GatewayIntent.GUILD_MESSAGE_TYPING
         ).addEventListeners(
                 GenericListeners()
         ).setStatus(

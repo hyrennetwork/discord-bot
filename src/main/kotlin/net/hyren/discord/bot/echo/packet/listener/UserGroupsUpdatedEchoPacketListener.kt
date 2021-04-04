@@ -17,7 +17,9 @@ class UserGroupsUpdatedEchoPacketListener : EchoListener {
         packet: UserGroupsUpdatedPacket
     ) {
         val userId = packet.userId ?: return
+
         val user = CoreProvider.Cache.Local.USERS.provide().fetchById(userId) ?: return
+
         val member = user.getMember() ?: return
 
         member.syncData()

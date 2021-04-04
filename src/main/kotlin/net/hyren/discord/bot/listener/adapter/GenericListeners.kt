@@ -1,9 +1,15 @@
 package net.hyren.discord.bot.listener.adapter
 
 import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent
-import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent
+import net.dv8tion.jda.api.events.user.UserActivityEndEvent
+import net.dv8tion.jda.api.events.user.UserActivityStartEvent
+import net.dv8tion.jda.api.events.user.UserTypingEvent
+import net.dv8tion.jda.api.events.user.update.UserUpdateOnlineStatusEvent
 import net.dv8tion.jda.api.hooks.ListenerAdapter
 import net.hyren.discord.bot.DiscordBotConstants
+import net.hyren.discord.bot.misc.jda.member.canSyncData
+import net.hyren.discord.bot.misc.jda.member.syncData
 
 /**
  * @author Gutyerrez
@@ -16,20 +22,54 @@ class GenericListeners : ListenerAdapter() {
         val guild = event.guild
         val member = event.member
 
-        val verificationRole = when (guild) {
-            DiscordBotConstants.GUILDS[DiscordBotConstants.GuildType.MAIN] -> DiscordBotConstants.Roles.MainGuild.VERIFICATION
-            else -> null
-        } ?: return
+        if (member.canSyncData()) {
+            val verificationRole = when (guild) {
+                DiscordBotConstants.GUILDS[DiscordBotConstants.GuildType.MAIN] -> DiscordBotConstants.Roles.MainGuild.VERIFICATION
+                else -> null
+            } ?: return
 
-        guild.addRoleToMember(member, verificationRole).queue()
+            guild.addRoleToMember(member, verificationRole).queue()
+        }
     }
 
-    override fun onGuildMessageReceived(
-        event: GuildMessageReceivedEvent
+    override fun onUserActivityStart(
+        event: UserActivityStartEvent
     ) {
-        val channel = event.channel
+        val member = event.member
 
-        channel.sendMessage("Bump!").queue()
+        member.syncData()
+    }
+
+    override fun onUserUpdateOnlineStatus(
+        event: UserUpdateOnlineStatusEvent
+    ) {
+        val member = event.member
+
+        member.syncData()
+    }
+
+    override fun onUserActivityEnd(
+        event: UserActivityEndEvent
+    ) {
+        val member = event.member
+
+        member.syncData()
+    }
+
+    override fun onUserTyping(
+        event: UserTypingEvent
+    ) {
+        val member = event.member
+
+        member?.syncData()
+    }
+
+    override fun onMessageReceived(
+        event: MessageReceivedEvent
+    ) {
+        val member = event.member
+
+        member?.syncData()
     }
 
 }
