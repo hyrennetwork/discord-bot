@@ -1,3 +1,4 @@
+import java.io.FileNotFoundException
 import java.net.URI
 
 plugins {
@@ -47,11 +48,15 @@ tasks {
 
                 file.copyTo(file("/home/cloud/output/$fileName"))
                 file.delete()
-            } catch (ex: java.io.FileNotFoundException) {
+            } catch (ex: FileNotFoundException) {
                 ex.printStackTrace()
             }
         }
     }
+}
+
+application {
+    mainClass.set("net.hyren.discord.bot.DiscordBotApplication")
 }
 
 dependencies {
