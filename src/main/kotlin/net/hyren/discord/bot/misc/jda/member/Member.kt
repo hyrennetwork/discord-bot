@@ -11,7 +11,7 @@ import net.hyren.discord.bot.groups.asRole
  */
 fun Member.canSyncData() = this.syncData() == true
 
-fun Member.canNotSyncData() = this.syncData() == null
+fun Member.canNotSyncData() = this.syncData() == false || this.syncData() == false
 
 fun Member.syncData(): Any? {
     val user = CoreProvider.Cache.Local.USERS.provide().fetchByDiscordId(
