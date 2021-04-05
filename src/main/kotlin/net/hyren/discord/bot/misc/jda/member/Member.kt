@@ -40,12 +40,13 @@ fun Member.syncData(): Any? {
 }
 
 fun Member.removeRoles() {
+    val guild = this.guild
+
     this.roles.stream()
         .filter { !it.isPublicRole }
         .filter { !it.isManaged }
+        .filter { it != DiscordBotConstants.Roles.getRolesByGuild(guild)?.VERIFICATION }
         .forEach {
-            DiscordBotConstants.GUILDS.values.forEach { guild ->
-                guild.removeRoleFromMember(this, it).queue()
+            guild.removeRoleFromMember(this, it).queue()
         }
-    }
 }
