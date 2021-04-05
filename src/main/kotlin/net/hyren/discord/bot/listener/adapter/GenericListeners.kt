@@ -3,11 +3,13 @@ package net.hyren.discord.bot.listener.adapter
 import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent
 import net.dv8tion.jda.api.events.guild.member.GuildMemberUpdateEvent
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent
+import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent
 import net.dv8tion.jda.api.events.user.UserActivityEndEvent
 import net.dv8tion.jda.api.events.user.UserActivityStartEvent
 import net.dv8tion.jda.api.events.user.UserTypingEvent
 import net.dv8tion.jda.api.events.user.update.UserUpdateOnlineStatusEvent
 import net.dv8tion.jda.api.hooks.ListenerAdapter
+import net.hyren.discord.bot.DiscordBotApplication
 import net.hyren.discord.bot.DiscordBotConstants
 import net.hyren.discord.bot.misc.jda.member.canNotSyncData
 import net.hyren.discord.bot.misc.jda.member.removeRoles
@@ -89,6 +91,19 @@ class GenericListeners : ListenerAdapter() {
             } ?: return
 
             guild.addRoleToMember(member, verificationRole).queue()
+        }
+    }
+
+    override fun onGuildMessageReceived(
+        event: GuildMessageReceivedEvent
+    ) {
+        val member = event.member
+        val channel = event.channel
+
+        if ((channel.isNews || channel.isSynced) && member == null || member?.idLong != DiscordBotApplication.jda.selfUser.idLong) {
+            val message = event.message
+
+            message.delete().queue()
         }
     }
 
