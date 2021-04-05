@@ -80,11 +80,7 @@ class GenericListeners : ListenerAdapter() {
         val guild = event.guild
         val member = event.member
 
-        println("Yeah!")
-
         if (member.canNotSyncData()) {
-            println("Opa")
-
             member.removeRoles()
 
             val verificationRole = when (guild) {
