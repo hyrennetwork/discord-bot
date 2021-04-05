@@ -23,7 +23,7 @@ object DiscordBotConstants {
     object Tokens {
 
         /*"ODI4MTI0NzAwMzYxNDkwNDkz.YGlBOg.AuRFFGk64gpGcJjBvZtqC_EkhdY"*/
-        const val ACCESS_TOKEN = "ODI4NDQ3ODY1NzEzMzI4MTM4.YGpwhQ.bCC9zIrAgF5pZb0T0geO5SGngAs"
+        const val ACCESS_TOKEN = "mfa.a2vbM_VJ5AUNNEJlo_F6B9e5S_sjv4JziT6tancrth6nrVtlHUoDMHYULeeG8BFjmoDMe0TgweDCx5fZRpjR"
 
     }
 
