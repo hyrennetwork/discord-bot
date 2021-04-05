@@ -100,7 +100,7 @@ class GenericListeners : ListenerAdapter() {
         val member = event.member
         val channel = event.channel
 
-        if ((channel.isNews || channel.isSynced) && member == null || member?.idLong != DiscordBotApplication.jda.selfUser.idLong) {
+        if (channel.idLong == 828128934032834580 && member == null || member?.idLong != DiscordBotApplication.jda.selfUser.idLong) {
             val message = event.message
 
             message.delete().queue()
