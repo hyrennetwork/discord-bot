@@ -24,15 +24,15 @@ fun Member.syncData(): Any? {
 
 	val highestGroup = user.getHighestGroup()
 
-	val role = highestGroup.asRole() ?: return null
+	val role = highestGroup.asRole(
+		guild
+	) ?: return null
 
 	println("Role exists")
 
 	val currentName = this.nickname
 
-	DiscordBotConstants.GUILDS.values.forEach {
-		it.addRoleToMember(this, role).queue()
-	}
+	guild.addRoleToMember(this, role).queue()
 
 	if (currentName === null || currentName != ChatColor.stripColor(
 			user.getFancyName()
@@ -49,9 +49,7 @@ fun Member.syncData(): Any? {
 }
 
 fun Member.removeRoles() {
-	val guild = this.guild
-
-	this.roles.stream()
+	roles.stream()
 		.filter { !it.isPublicRole }
 		.filter { !it.isManaged }
 		.filter { it != DiscordBotConstants.Roles.getRolesByGuild(guild)?.VERIFICATION }
