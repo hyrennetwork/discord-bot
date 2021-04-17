@@ -14,21 +14,15 @@ fun Member.canSyncData() = this.syncData() == true
 fun Member.canNotSyncData() = this.syncData() == null || this.syncData() == false
 
 fun Member.syncData(): Any? {
-	println("Search")
-
 	val user = CoreProvider.Cache.Local.USERS.provide().fetchByDiscordId(
 		this.idLong
 	) ?: return null
-
-	println("Searched")
 
 	val highestGroup = user.getHighestGroup()
 
 	val role = highestGroup.asRole(
 		guild
 	) ?: return null
-
-	println("Role exists")
 
 	val currentName = this.nickname
 

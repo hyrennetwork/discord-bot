@@ -1,7 +1,5 @@
 package net.hyren.discord.bot.listener.adapter
 
-import net.dv8tion.jda.api.entities.Member
-import net.dv8tion.jda.api.events.StatusChangeEvent
 import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent
 import net.dv8tion.jda.api.events.guild.member.GuildMemberUpdateEvent
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent
@@ -50,18 +48,6 @@ class GenericListeners : ListenerAdapter() {
         val member = event.member
 
         member.syncData()
-    }
-
-    override fun onStatusChange(
-        event: StatusChangeEvent
-    ) {
-        val entity = event.entity
-
-        println(entity.accountType)
-        
-        if (entity is Member) {
-            entity.syncData()
-        }
     }
 
     override fun onUserActivityEnd(
