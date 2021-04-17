@@ -11,7 +11,11 @@ import net.hyren.discord.bot.DiscordBotConstants
 fun Group.asRole(
     guild: Guild? = DiscordBotConstants.GUILDS[DiscordBotConstants.GuildType.MAIN]
 ): Role? {
+    println(this)
+
     if (guild?.idLong == DiscordBotConstants.MAIN_GUILD_ID) {
+        println("opa")
+
         when {
             this == Group.MASTER -> DiscordBotConstants.Roles.MainGuild.MASTER
             this == Group.MANAGER -> DiscordBotConstants.Roles.MainGuild.MANAGER
