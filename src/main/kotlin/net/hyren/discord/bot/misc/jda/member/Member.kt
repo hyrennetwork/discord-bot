@@ -14,39 +14,48 @@ fun Member.canSyncData() = this.syncData() == true
 fun Member.canNotSyncData() = this.syncData() == null || this.syncData() == false
 
 fun Member.syncData(): Any? {
-    val user = CoreProvider.Cache.Local.USERS.provide().fetchByDiscordId(
-        this.idLong
-    ) ?: return null
+	println("Search")
 
-    val highestGroup = user.getHighestGroup()
+	val user = CoreProvider.Cache.Local.USERS.provide().fetchByDiscordId(
+		this.idLong
+	) ?: return null
 
-    val role = highestGroup.asRole() ?: return null
+	println("Searched")
 
-    val currentName = this.nickname
+	val highestGroup = user.getHighestGroup()
 
-    DiscordBotConstants.GUILDS.values.forEach {
-        it.addRoleToMember(this, role).queue()
-    }
+	val role = highestGroup.asRole() ?: return null
 
-    if (currentName === null || currentName != ChatColor.stripColor(
-            user.getFancyName()
-    )) {
-        this.modifyNickname(ChatColor.stripColor(
-                user.getFancyName()
-        ))
-    }
+	println("Role exists")
 
-    return true
+	val currentName = this.nickname
+
+	DiscordBotConstants.GUILDS.values.forEach {
+		it.addRoleToMember(this, role).queue()
+	}
+
+	if (currentName === null || currentName != ChatColor.stripColor(
+			user.getFancyName()
+		)
+	) {
+		this.modifyNickname(
+			ChatColor.stripColor(
+				user.getFancyName()
+			)
+		)
+	}
+
+	return true
 }
 
 fun Member.removeRoles() {
-    val guild = this.guild
+	val guild = this.guild
 
-    this.roles.stream()
-        .filter { !it.isPublicRole }
-        .filter { !it.isManaged }
-        .filter { it != DiscordBotConstants.Roles.getRolesByGuild(guild)?.VERIFICATION }
-        .forEach {
-            guild.removeRoleFromMember(this, it).queue()
-        }
+	this.roles.stream()
+		.filter { !it.isPublicRole }
+		.filter { !it.isManaged }
+		.filter { it != DiscordBotConstants.Roles.getRolesByGuild(guild)?.VERIFICATION }
+		.forEach {
+			guild.removeRoleFromMember(this, it).queue()
+		}
 }
