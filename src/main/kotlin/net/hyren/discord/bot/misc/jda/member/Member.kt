@@ -26,7 +26,8 @@ fun Member.syncData(): Any? {
 
 	val currentName = this.nickname
 
-	guild.addRoleToMember(this, role).queue()
+	if (!roles.contains(role))
+		guild.addRoleToMember(this, role).queue()
 
 	if (currentName === null || currentName != ChatColor.stripColor(
 			user.getFancyName()
@@ -36,7 +37,7 @@ fun Member.syncData(): Any? {
 			ChatColor.stripColor(
 				user.getFancyName()
 			)
-		)
+		).queue()
 	}
 
 	return true
