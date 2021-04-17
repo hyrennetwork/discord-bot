@@ -51,10 +51,6 @@ object DiscordBotConstants {
 
             override val VERIFICATION = DiscordBotApplication.jda.roleCache.getElementById(828204580977508382)
 
-            init {
-                println("Master: ${MASTER == null}")
-            }
-
         }
 
         abstract class GuildRoles {

@@ -1,7 +1,6 @@
 package net.hyren.discord.bot.misc.jda.member
 
 import com.redefantasy.core.shared.CoreProvider
-import com.redefantasy.core.shared.misc.utils.ChatColor
 import net.dv8tion.jda.api.entities.Member
 import net.hyren.discord.bot.DiscordBotConstants
 import net.hyren.discord.bot.groups.asRole
@@ -29,14 +28,9 @@ fun Member.syncData(): Any? {
 	if (!roles.contains(role))
 		guild.addRoleToMember(this, role).queue()
 
-	if (currentName === null || currentName != ChatColor.stripColor(
-			user.getFancyName()
-		)
-	) {
+	if (currentName === null || currentName != "${user.getHighestGroup().prefix}${user.name}") {
 		this.modifyNickname(
-			ChatColor.stripColor(
-				user.getFancyName()
-			)
+			"${user.getHighestGroup().prefix}${user.name}"
 		).queue()
 	}
 
