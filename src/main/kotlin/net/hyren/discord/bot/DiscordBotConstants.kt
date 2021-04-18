@@ -34,6 +34,14 @@ object DiscordBotConstants {
         init {
             println("Inicializando...")
 
+            DiscordBotApplication.jda.guildCache.forEach {
+                println(it.name)
+
+                it.textChannelCache.forEach {
+                    println("Canal: ${it.name} -> ${it.id}")
+                }
+            }
+
             DiscordBotApplication.jda.textChannelCache.forEach {
                 println("Channel: ${it.name} -> ${it.id} | ${it.idLong}")
             }

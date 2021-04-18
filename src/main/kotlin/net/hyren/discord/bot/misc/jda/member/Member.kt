@@ -14,6 +14,8 @@ fun Member.canSyncData() = this.syncData() == true
 fun Member.canNotSyncData() = this.syncData() == null || this.syncData() == false
 
 fun Member.syncData(): Any? {
+	if (user.isBot) return null
+
 	val user = CoreProvider.Cache.Local.USERS.provide().fetchByDiscordId(
 		idLong
 	) ?: return null
