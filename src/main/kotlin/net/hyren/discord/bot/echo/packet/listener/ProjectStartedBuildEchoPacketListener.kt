@@ -15,6 +15,8 @@ class ProjectStartedBuildEchoPacketListener : EchoListener {
 	fun on(
 		packet: ProjectStartedBuildEchoPacket
 	) {
+		println("AA")
+
 		DiscordBotConstants.GUILDS[DiscordBotConstants.GuildType.MAIN]?.getTextChannelById(
 			826289489214701603
 		)?.sendMessage(EmbedBuilder()
