@@ -17,6 +17,8 @@ class ProjectStartedBuildEchoPacketListener : EchoListener {
 	) {
 		println("AA")
 
+		println(DiscordBotConstants.Channels.GENERAL_CHAT === null)
+
 		DiscordBotConstants.Channels.GENERAL_CHAT?.sendMessage(
 			EmbedBuilder()
 				.setTitle("Iniciando build #${packet.buildId}")
