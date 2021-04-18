@@ -44,7 +44,7 @@ fun Member.removeRoles() {
 		.filter {
 			CoreProvider.Cache.Local.USERS.provide().fetchByDiscordId(
 				this.idLong
-			) ===  null && it != DiscordBotConstants.Roles.getRolesByGuild(guild)?.VERIFICATION
+			) !==  null && it != DiscordBotConstants.Roles.getRolesByGuild(guild)?.VERIFICATION
 		}
 		.forEach {
 			guild.removeRoleFromMember(this, it).queue()
