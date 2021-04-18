@@ -59,11 +59,11 @@ fun Member.validatePunishments() {
 			)
 		)?.queue()
 	} else if (
-		DiscordBotConstants.Channels.GENERAL_CHAT?.manager?.channel?.getPermissionOverride(
+		DiscordBotConstants.Channels.GENERAL_CHAT?.getPermissionOverride(
 			this
-		)?.isMemberOverride == true
+		)?.permissionHolder?.hasPermission(Permission.MESSAGE_WRITE) == false
 	) {
-		DiscordBotConstants.Channels.GENERAL_CHAT.manager.removePermissionOverride(this)
+		DiscordBotConstants.Channels.GENERAL_CHAT?.manager?.removePermissionOverride(this)?.queue()
 	}
 }
 
