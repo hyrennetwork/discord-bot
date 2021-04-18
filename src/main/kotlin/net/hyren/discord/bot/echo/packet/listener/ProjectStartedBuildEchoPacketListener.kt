@@ -36,7 +36,7 @@ class ProjectStartedBuildEchoPacketListener : EchoListener {
 				"287asd87",
 				true
 			).build()
-		).queue()
+		)?.queue()
 	}
 
 }
