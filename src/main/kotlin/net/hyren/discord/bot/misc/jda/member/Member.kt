@@ -17,6 +17,11 @@ fun Member.syncData(): Any? {
 		this.idLong
 	) ?: return null
 
+	val verificationRole = DiscordBotConstants.Roles.getRolesByGuild(guild)?.VERIFICATION
+
+	if (roles.contains(verificationRole))
+		verificationRole?.let { guild.removeRoleFromMember(this, verificationRole).queue() }
+
 	val highestGroup = user.getHighestGroup()
 
 	val role = highestGroup.asRole(
@@ -41,11 +46,7 @@ fun Member.removeRoles() {
 	roles.stream()
 		.filter { !it.isPublicRole }
 		.filter { !it.isManaged }
-		.filter {
-			CoreProvider.Cache.Local.USERS.provide().fetchByDiscordId(
-				this.idLong
-			) !==  null && it != DiscordBotConstants.Roles.getRolesByGuild(guild)?.VERIFICATION
-		}
+		.filter { it != DiscordBotConstants.Roles.getRolesByGuild(guild)?.VERIFICATION }
 		.forEach {
 			guild.removeRoleFromMember(this, it).queue()
 		}
