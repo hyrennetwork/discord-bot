@@ -18,78 +18,78 @@ import net.hyren.discord.bot.misc.jda.member.syncData
  */
 class GenericListeners : ListenerAdapter() {
 
-    override fun onGuildMemberJoin(
-        event: GuildMemberJoinEvent
-    ) {
-        val guild = event.guild
-        val member = event.member
+	override fun onGuildMemberJoin(
+		event: GuildMemberJoinEvent
+	) {
+		val guild = event.guild
+		val member = event.member
 
-        if (member.canNotSyncData()) {
-            val verificationRole = when (guild) {
-                DiscordBotConstants.GUILDS[DiscordBotConstants.GuildType.MAIN] -> DiscordBotConstants.Roles.MainGuild.VERIFICATION
-                else -> null
-            } ?: return
+		if (member.canNotSyncData()) {
+			val verificationRole = when (guild) {
+				DiscordBotConstants.GUILDS[DiscordBotConstants.GuildType.MAIN] -> DiscordBotConstants.Roles.MainGuild.VERIFICATION
+				else -> null
+			} ?: return
 
-            guild.addRoleToMember(member, verificationRole).queue()
-        }
-    }
+			guild.addRoleToMember(member, verificationRole).queue()
+		}
+	}
 
-    override fun onUserActivityStart(
-        event: UserActivityStartEvent
-    ) {
-        val member = event.member
+	override fun onUserActivityStart(
+		event: UserActivityStartEvent
+	) {
+		val member = event.member
 
-        member.syncData()
-    }
+		member.syncData()
+	}
 
-    override fun onUserUpdateOnlineStatus(
-        event: UserUpdateOnlineStatusEvent
-    ) {
-        val member = event.member
+	override fun onUserUpdateOnlineStatus(
+		event: UserUpdateOnlineStatusEvent
+	) {
+		val member = event.member
 
-        member.syncData()
-    }
+		member.syncData()
+	}
 
-    override fun onUserActivityEnd(
-        event: UserActivityEndEvent
-    ) {
-        val member = event.member
+	override fun onUserActivityEnd(
+		event: UserActivityEndEvent
+	) {
+		val member = event.member
 
-        member.syncData()
-    }
+		member.syncData()
+	}
 
-    override fun onUserTyping(
-        event: UserTypingEvent
-    ) {
-        val member = event.member
+	override fun onUserTyping(
+		event: UserTypingEvent
+	) {
+		val member = event.member
 
-        member?.syncData()
-    }
+		member?.syncData()
+	}
 
-    override fun onMessageReceived(
-        event: MessageReceivedEvent
-    ) {
-        val member = event.member
+	override fun onMessageReceived(
+		event: MessageReceivedEvent
+	) {
+		val member = event.member
 
-        member?.syncData()
-    }
+		member?.syncData()
+	}
 
-    override fun onGuildMemberUpdate(
-        event: GuildMemberUpdateEvent
-    ) {
-        val guild = event.guild
-        val member = event.member
+	override fun onGuildMemberUpdate(
+		event: GuildMemberUpdateEvent
+	) {
+		val guild = event.guild
+		val member = event.member
 
-        if (member.canNotSyncData()) {
-            member.removeRoles()
+		if (member.canNotSyncData()) {
+			member.removeRoles()
 
-            val verificationRole = when (guild) {
-                DiscordBotConstants.GUILDS[DiscordBotConstants.GuildType.MAIN] -> DiscordBotConstants.Roles.MainGuild.VERIFICATION
-                else -> null
-            } ?: return
+			val verificationRole = when (guild) {
+				DiscordBotConstants.GUILDS[DiscordBotConstants.GuildType.MAIN] -> DiscordBotConstants.Roles.MainGuild.VERIFICATION
+				else -> null
+			} ?: return
 
-            guild.addRoleToMember(member, verificationRole).queue()
-        }
-    }
+			guild.addRoleToMember(member, verificationRole).queue()
+		}
+	}
 
 }

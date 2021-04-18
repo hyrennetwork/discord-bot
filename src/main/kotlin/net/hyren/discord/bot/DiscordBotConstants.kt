@@ -26,6 +26,12 @@ object DiscordBotConstants {
 
     }
 
+    object Channels {
+
+        val GENERAL_CHAT = GUILDS[GuildType.MAIN]?.getTextChannelById(826289489214701603)
+
+    }
+
     object Roles {
 
         fun getRolesByGuild(

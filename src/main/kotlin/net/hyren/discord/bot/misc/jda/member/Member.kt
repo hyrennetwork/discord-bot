@@ -1,6 +1,7 @@
 package net.hyren.discord.bot.misc.jda.member
 
 import com.redefantasy.core.shared.CoreProvider
+import net.dv8tion.jda.api.Permission
 import net.dv8tion.jda.api.entities.Member
 import net.hyren.discord.bot.DiscordBotConstants
 import net.hyren.discord.bot.groups.asRole
@@ -14,7 +15,7 @@ fun Member.canNotSyncData() = this.syncData() == null || this.syncData() == fals
 
 fun Member.syncData(): Any? {
 	val user = CoreProvider.Cache.Local.USERS.provide().fetchByDiscordId(
-		this.idLong
+		idLong
 	) ?: return null
 
 	val verificationRole = DiscordBotConstants.Roles.getRolesByGuild(guild)?.VERIFICATION
@@ -24,22 +25,38 @@ fun Member.syncData(): Any? {
 
 	val highestGroup = user.getHighestGroup()
 
+	validatePunishments()
+
 	val role = highestGroup.asRole(
 		guild
 	) ?: return null
 
-	val currentName = this.nickname
-
 	if (!roles.contains(role))
 		guild.addRoleToMember(this, role).queue()
 
-	if (currentName === null || currentName != "${user.getHighestGroup().prefix}${user.name}") {
-		this.modifyNickname(
+	if (nickname === null || nickname != "${user.getHighestGroup().prefix}${user.name}") {
+		modifyNickname(
 			"${user.getHighestGroup().prefix}${user.name}"
 		).queue()
 	}
 
 	return true
+}
+
+fun Member.validatePunishments() {
+	val user = CoreProvider.Cache.Local.USERS.provide().fetchByDiscordId(
+		idLong
+	) ?: return
+
+	if (!user.getPunishments().stream().filter { !it.isBan() }.findFirst().isEmpty) {
+		DiscordBotConstants.Channels.GENERAL_CHAT?.manager?.putPermissionOverride(
+			this,
+			emptySet(),
+			setOf(
+				Permission.MESSAGE_WRITE
+			)
+		)?.queue()
+	}
 }
 
 fun Member.removeRoles() {

@@ -12,17 +12,17 @@ import org.greenrobot.eventbus.Subscribe
  */
 class UserGroupsUpdatedEchoPacketListener : EchoListener {
 
-    @Subscribe
-    fun on(
-        packet: UserGroupsUpdatedPacket
-    ) {
-        val userId = packet.userId ?: return
+	@Subscribe
+	fun on(
+		packet: UserGroupsUpdatedPacket
+	) {
+		val userId = packet.userId ?: return
 
-        val user = CoreProvider.Cache.Local.USERS.provide().fetchById(userId) ?: return
+		val user = CoreProvider.Cache.Local.USERS.provide().fetchById(userId) ?: return
 
-        val member = user.getMember() ?: return
+		val member = user.getMember() ?: return
 
-        member.syncData()
-    }
+		member.syncData()
+	}
 
 }
