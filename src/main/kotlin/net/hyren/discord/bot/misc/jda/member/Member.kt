@@ -61,7 +61,7 @@ fun Member.validatePunishments() {
 	} else if (
 		DiscordBotConstants.Channels.GENERAL_CHAT?.getPermissionOverride(
 			this
-		)?.member?.hasPermission(Permission.MESSAGE_WRITE) == false
+		)?.denied?.contains(Permission.MESSAGE_WRITE) == true
 	) {
 		println("Não pode escrever, ativando")
 
