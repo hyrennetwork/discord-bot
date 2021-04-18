@@ -48,9 +48,9 @@ fun Member.validatePunishments() {
 		idLong
 	) ?: return
 
-	if (user.getPunishments().stream().filter { !it.isBan() && (it.isPending() || it.isActive()) }.findFirst().isPresent) {
-		println("Mutado")
+	CoreProvider.Cache.Local.USERS_PUNISHMENTS.provide().invalidate(user.getUniqueId())
 
+	if (user.getPunishments().stream().filter { !it.isBan() && (it.isPending() || it.isActive()) }.findFirst().isPresent) {
 		DiscordBotConstants.Channels.GENERAL_CHAT?.manager?.putPermissionOverride(
 			this,
 			emptySet(),
@@ -63,8 +63,6 @@ fun Member.validatePunishments() {
 			this
 		)?.denied?.contains(Permission.MESSAGE_WRITE) == true
 	) {
-		println("Não pode escrever, ativando")
-
 		DiscordBotConstants.Channels.GENERAL_CHAT?.manager?.removePermissionOverride(this)?.queue()
 	}
 }
