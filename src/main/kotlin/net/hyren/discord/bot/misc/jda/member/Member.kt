@@ -48,7 +48,7 @@ fun Member.validatePunishments() {
 		idLong
 	) ?: return
 
-	if (!user.getPunishments().stream().filter { !it.isBan() && it.isPending() || it.isActive() }.findFirst().isPresent) {
+	if (user.getPunishments().stream().filter { !it.isBan() && (it.isPending() || it.isActive()) }.findFirst().isPresent) {
 		println("Mutado")
 
 		DiscordBotConstants.Channels.GENERAL_CHAT?.manager?.putPermissionOverride(
