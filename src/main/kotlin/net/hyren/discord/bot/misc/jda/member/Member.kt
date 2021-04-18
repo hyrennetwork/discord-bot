@@ -48,7 +48,7 @@ fun Member.validatePunishments() {
 		idLong
 	) ?: return
 
-	if (!user.getPunishments().stream().filter { !it.isBan() }.findFirst().isEmpty) {
+	if (!user.getPunishments().stream().filter { !it.isBan() }.findFirst().isPresent) {
 		DiscordBotConstants.Channels.GENERAL_CHAT?.manager?.putPermissionOverride(
 			this,
 			emptySet(),
