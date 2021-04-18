@@ -61,8 +61,10 @@ fun Member.validatePunishments() {
 	} else if (
 		DiscordBotConstants.Channels.GENERAL_CHAT?.getPermissionOverride(
 			this
-		)?.permissionHolder?.hasPermission(Permission.MESSAGE_WRITE) == false
+		)?.member?.hasPermission(Permission.MESSAGE_WRITE) == false
 	) {
+		println("Não pode escrever, ativando")
+
 		DiscordBotConstants.Channels.GENERAL_CHAT?.manager?.removePermissionOverride(this)?.queue()
 	}
 }
