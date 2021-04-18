@@ -2,7 +2,6 @@ package net.hyren.discord.bot
 
 import net.dv8tion.jda.api.entities.Guild
 import net.dv8tion.jda.api.entities.Role
-import net.dv8tion.jda.api.entities.TextChannel
 import java.util.function.Supplier
 
 /**
@@ -29,19 +28,7 @@ object DiscordBotConstants {
 
     object Channels {
 
-        val GENERAL_CHAT: TextChannel?
-
-        init {
-            println("Inicializando...")
-
-            DiscordBotApplication.jda.textChannels.forEach {
-                println("Channel: ${it.name} -> ${it.id} | ${it.idLong}")
-            }
-
-            println("Carreguei os canais")
-
-            GENERAL_CHAT = DiscordBotApplication.jda.textChannelCache.getElementById(826289489214701603)
-        }
+        val GENERAL_CHAT = DiscordBotApplication.jda.textChannelCache.getElementById(826289489214701603)
 
     }
 
