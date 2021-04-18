@@ -7,6 +7,7 @@ import net.dv8tion.jda.api.JDABuilder
 import net.dv8tion.jda.api.OnlineStatus
 import net.dv8tion.jda.api.requests.GatewayIntent
 import net.dv8tion.jda.api.utils.cache.CacheFlag
+import net.hyren.discord.bot.echo.packet.listener.ProjectStartedBuildEchoPacketListener
 import net.hyren.discord.bot.echo.packet.listener.UserGroupsUpdatedEchoPacketListener
 import net.hyren.discord.bot.echo.packet.listener.UserPunishedEchoPacketListener
 import net.hyren.discord.bot.listener.adapter.GenericListeners
@@ -45,6 +46,7 @@ object DiscordBotApplication {
 		 */
 		CoreProvider.Databases.Redis.ECHO.provide().registerListener(UserGroupsUpdatedEchoPacketListener())
 		CoreProvider.Databases.Redis.ECHO.provide().registerListener(UserPunishedEchoPacketListener())
+		CoreProvider.Databases.Redis.ECHO.provide().registerListener(ProjectStartedBuildEchoPacketListener())
 
 		/**
 		 * Tasks
