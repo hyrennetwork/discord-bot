@@ -32,9 +32,13 @@ object DiscordBotConstants {
         val GENERAL_CHAT: TextChannel?
 
         init {
+            println("Inicializando...")
+
             DiscordBotApplication.jda.textChannelCache.forEach {
                 println("Channel: ${it.name} -> ${it.id} | ${it.idLong}")
             }
+
+            println("Carreguei os canais")
 
             GENERAL_CHAT = DiscordBotApplication.jda.textChannelCache.getElementById(826289489214701603)
         }

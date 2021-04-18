@@ -4,7 +4,6 @@ import com.redefantasy.core.shared.CoreProvider
 import com.redefantasy.core.shared.scheduler.AsyncScheduler
 import net.dv8tion.jda.api.JDA
 import net.dv8tion.jda.api.JDABuilder
-import net.dv8tion.jda.api.OnlineStatus
 import net.dv8tion.jda.api.requests.GatewayIntent
 import net.dv8tion.jda.api.utils.cache.CacheFlag
 import net.hyren.discord.bot.echo.packet.listener.ProjectStartedBuildEchoPacketListener
@@ -37,8 +36,6 @@ object DiscordBotApplication {
 			CacheFlag.EMOTE
 		).addEventListeners(
 			GenericListeners()
-		).setStatus(
-			OnlineStatus.OFFLINE
 		).build()
 
 		/**
