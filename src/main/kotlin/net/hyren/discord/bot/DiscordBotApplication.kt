@@ -1,6 +1,7 @@
 package net.hyren.discord.bot
 
 import com.redefantasy.core.shared.CoreProvider
+import com.redefantasy.core.shared.scheduler.AsyncScheduler
 import net.dv8tion.jda.api.JDA
 import net.dv8tion.jda.api.JDABuilder
 import net.dv8tion.jda.api.OnlineStatus
@@ -9,6 +10,8 @@ import net.dv8tion.jda.api.utils.cache.CacheFlag
 import net.hyren.discord.bot.echo.packet.listener.UserGroupsUpdatedEchoPacketListener
 import net.hyren.discord.bot.echo.packet.listener.UserPunishedEchoPacketListener
 import net.hyren.discord.bot.listener.adapter.GenericListeners
+import net.hyren.discord.bot.misc.punish.task.ValidateMembersPunishmentRunnable
+import java.util.concurrent.TimeUnit
 
 /**
  * @author Gutyerrez
@@ -42,6 +45,17 @@ object DiscordBotApplication {
 		 */
 		CoreProvider.Databases.Redis.ECHO.provide().registerListener(UserGroupsUpdatedEchoPacketListener())
 		CoreProvider.Databases.Redis.ECHO.provide().registerListener(UserPunishedEchoPacketListener())
+
+		/**
+		 * Tasks
+		 */
+
+		AsyncScheduler.scheduleAsyncRepeatingTask(
+			ValidateMembersPunishmentRunnable(),
+			0,
+			5,
+			TimeUnit.SECONDS
+		)
 	}
 
 }
