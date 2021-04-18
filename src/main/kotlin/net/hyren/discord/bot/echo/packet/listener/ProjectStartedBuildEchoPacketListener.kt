@@ -17,27 +17,26 @@ class ProjectStartedBuildEchoPacketListener : EchoListener {
 	) {
 		println("AA")
 
-		DiscordBotConstants.GUILDS[DiscordBotConstants.GuildType.MAIN]?.getTextChannelById(
-			826289489214701603
-		)?.sendMessage(EmbedBuilder()
-			.setTitle("Iniciando build #${packet.buildId}")
-			.addField(
-				"Projeto",
-				"Teste",
-				true
-			).addField(
-				"Status",
-				"Aguardando início",
-				true
-			).addField(
-				"Requisitado por",
-				"Gutyerrez",
-				true
-			).addField(
-				"Commit",
-				"287asd87",
-				true
-			).build()
+		DiscordBotConstants.Channels.GENERAL_CHAT?.sendMessage(
+			EmbedBuilder()
+				.setTitle("Iniciando build #${packet.buildId}")
+				.addField(
+					"Projeto",
+					"Teste",
+					true
+				).addField(
+					"Status",
+					"Aguardando início",
+					true
+				).addField(
+					"Requisitado por",
+					"Gutyerrez",
+					true
+				).addField(
+					"Commit",
+					"287asd87",
+					true
+				).build()
 		)?.queue()
 	}
 
