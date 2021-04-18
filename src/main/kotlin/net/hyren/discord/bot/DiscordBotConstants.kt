@@ -28,7 +28,7 @@ object DiscordBotConstants {
 
     object Channels {
 
-        val GENERAL_CHAT = GUILDS[GuildType.MAIN]?.textChannelCache?.getElementById(826289489214701603)
+        val GENERAL_CHAT = DiscordBotApplication.jda.textChannelCache.getElementById(826289489214701603)
 
     }
 
