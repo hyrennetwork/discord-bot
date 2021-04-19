@@ -1,9 +1,10 @@
-package net.hyren.discord.bot.echo.packet.listener
+package net.hyren.discord.bot.echo.packet.listener.project
 
 import com.redefantasy.core.shared.echo.api.listener.EchoListener
 import com.redefantasy.core.shared.echo.packets.project.ProjectStartedBuildEchoPacket
 import net.dv8tion.jda.api.EmbedBuilder
 import net.hyren.discord.bot.DiscordBotApplication
+import net.hyren.discord.bot.DiscordBotConstants
 import org.greenrobot.eventbus.Subscribe
 
 /**
@@ -15,15 +16,14 @@ class ProjectStartedBuildEchoPacketListener : EchoListener {
 	fun on(
 		packet: ProjectStartedBuildEchoPacket
 	) {
-		println("AA")
+		println(DiscordBotConstants.Channels.GENERAL_CHAT === null)
 
 		val chat = DiscordBotApplication.jda.getTextChannelById(826289489214701603)
-
-		println(chat === null)
 
 		chat?.sendMessage(
 			EmbedBuilder()
 				.setTitle("Iniciando build #${packet.buildId}")
+				.setDescription("Projeto teste...")
 				.addField(
 					"Projeto",
 					"Teste",
@@ -40,10 +40,12 @@ class ProjectStartedBuildEchoPacketListener : EchoListener {
 					"Commit",
 					"287asd87",
 					true
+				).addField(
+					"Branch",
+					"main",
+					true
 				).build()
-		)?.queue {
-			println("AAA")
-		}
+		)?.queue()
 	}
 
 }

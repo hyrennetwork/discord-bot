@@ -6,9 +6,11 @@ import net.dv8tion.jda.api.JDA
 import net.dv8tion.jda.api.JDABuilder
 import net.dv8tion.jda.api.requests.GatewayIntent
 import net.dv8tion.jda.api.utils.cache.CacheFlag
-import net.hyren.discord.bot.echo.packet.listener.ProjectStartedBuildEchoPacketListener
 import net.hyren.discord.bot.echo.packet.listener.UserGroupsUpdatedEchoPacketListener
 import net.hyren.discord.bot.echo.packet.listener.UserPunishedEchoPacketListener
+import net.hyren.discord.bot.echo.packet.listener.project.ProjectFailedBuildEchoPacketListener
+import net.hyren.discord.bot.echo.packet.listener.project.ProjectStartedBuildEchoPacketListener
+import net.hyren.discord.bot.echo.packet.listener.project.ProjectSuccessBuildEchoPacketListener
 import net.hyren.discord.bot.listener.adapter.GenericListeners
 import net.hyren.discord.bot.misc.punish.task.ValidateMembersPunishmentRunnable
 import java.util.concurrent.TimeUnit
@@ -44,6 +46,8 @@ object DiscordBotApplication {
 		CoreProvider.Databases.Redis.ECHO.provide().registerListener(UserGroupsUpdatedEchoPacketListener())
 		CoreProvider.Databases.Redis.ECHO.provide().registerListener(UserPunishedEchoPacketListener())
 		CoreProvider.Databases.Redis.ECHO.provide().registerListener(ProjectStartedBuildEchoPacketListener())
+		CoreProvider.Databases.Redis.ECHO.provide().registerListener(ProjectSuccessBuildEchoPacketListener())
+		CoreProvider.Databases.Redis.ECHO.provide().registerListener(ProjectFailedBuildEchoPacketListener())
 
 		/**
 		 * Tasks
