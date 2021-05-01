@@ -1,9 +1,7 @@
-name: Discord-Bot
-
 on: [ 'push' ]
 
 jobs:
-  build:
+  bdiscord-bot:
     runs-on: self-hosted
 
     steps:
