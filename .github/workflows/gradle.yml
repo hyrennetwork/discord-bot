@@ -1,3 +1,5 @@
+name: Discord-Bot
+
 on: [ 'push' ]
 
 jobs:
