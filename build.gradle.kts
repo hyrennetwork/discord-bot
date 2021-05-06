@@ -1,6 +1,3 @@
-import java.io.FileNotFoundException
-import java.net.URI
-
 plugins {
     kotlin("jvm") version "1.4.32"
 
@@ -13,13 +10,14 @@ version = "0.1-ALPHA"
 repositories {
     mavenCentral()
 
-    mavenLocal()
-
     jcenter()
 
-    maven {
-        name = "m2-dv8tion"
-        url = URI("https://m2.dv8tion.net/releases")
+    maven("https://m2.dv8tion.net/releases")
+    maven("https://maven.pkg.github.com/hyrendev/nexus/") {
+        credentials {
+            username = System.getenv("MAVEN_USERNAME")
+            password = System.getenv("MAVEN_PASSWORD")
+        }
     }
 }
 
@@ -35,24 +33,7 @@ tasks {
             attributes["Main-Class"] = "net.hyren.discord.bot.DiscordBotApplication"
         }
 
-        val fileName = "${project.name}.jar"
-
         archiveFileName.set("${project.name}.jar")
-
-        doLast {
-            try {
-                val file = file("build/libs/$fileName")
-
-                val toDelete = file("/home/cloud/output/$fileName")
-
-                if (toDelete.exists()) toDelete.delete()
-
-                file.copyTo(file("/home/cloud/output/$fileName"))
-                file.delete()
-            } catch (ex: FileNotFoundException) {
-                ex.printStackTrace()
-            }
-        }
     }
 }
 
