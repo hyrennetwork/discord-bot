@@ -1,8 +1,8 @@
 package net.hyren.discord.bot.user
 
-import com.redefantasy.core.shared.users.data.User
 import net.dv8tion.jda.api.entities.Guild
 import net.dv8tion.jda.api.entities.Member
+import net.hyren.core.shared.users.data.User
 import net.hyren.discord.bot.DiscordBotConstants
 
 /**

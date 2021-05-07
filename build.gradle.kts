@@ -59,5 +59,5 @@ dependencies {
     compileOnly("com.github.ben-manes.caffeine:caffeine:2.8.5")
 
     // core
-    implementation("com.redefantasy:core-shared:0.1-ALPHA")
+    implementation("net.hyren:core-shared:0.1-ALPHA")
 }

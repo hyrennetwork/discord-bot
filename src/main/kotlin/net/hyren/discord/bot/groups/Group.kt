@@ -1,8 +1,8 @@
 package net.hyren.discord.bot.groups
 
-import com.redefantasy.core.shared.groups.Group
 import net.dv8tion.jda.api.entities.Guild
 import net.dv8tion.jda.api.entities.Role
+import net.hyren.core.shared.groups.Group
 import net.hyren.discord.bot.DiscordBotConstants
 
 /**

@@ -1,8 +1,8 @@
 package net.hyren.discord.bot.misc.jda.member
 
-import com.redefantasy.core.shared.CoreProvider
 import net.dv8tion.jda.api.Permission
 import net.dv8tion.jda.api.entities.Member
+import net.hyren.core.shared.CoreProvider
 import net.hyren.discord.bot.DiscordBotConstants
 import net.hyren.discord.bot.groups.asRole
 

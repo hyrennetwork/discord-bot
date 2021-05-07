@@ -1,8 +1,8 @@
 package net.hyren.discord.bot.echo.packet.listener
 
-import com.redefantasy.core.shared.CoreProvider
-import com.redefantasy.core.shared.echo.api.listener.EchoListener
-import com.redefantasy.core.shared.echo.packets.UserPunishedPacket
+import net.hyren.core.shared.CoreProvider
+import net.hyren.core.shared.echo.api.listener.EchoListener
+import net.hyren.core.shared.echo.packets.UserPunishedPacket
 import net.hyren.discord.bot.misc.jda.member.validatePunishments
 import net.hyren.discord.bot.user.getMember
 import org.greenrobot.eventbus.Subscribe

@@ -1,11 +1,11 @@
 package net.hyren.discord.bot
 
-import com.redefantasy.core.shared.CoreProvider
-import com.redefantasy.core.shared.scheduler.AsyncScheduler
 import net.dv8tion.jda.api.JDA
 import net.dv8tion.jda.api.JDABuilder
 import net.dv8tion.jda.api.requests.GatewayIntent
 import net.dv8tion.jda.api.utils.cache.CacheFlag
+import net.hyren.core.shared.CoreProvider
+import net.hyren.core.shared.scheduler.AsyncScheduler
 import net.hyren.discord.bot.echo.packet.listener.UserGroupsUpdatedEchoPacketListener
 import net.hyren.discord.bot.echo.packet.listener.UserPunishedEchoPacketListener
 import net.hyren.discord.bot.echo.packet.listener.project.ProjectFailedBuildEchoPacketListener
